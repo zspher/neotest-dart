@@ -1,5 +1,4 @@
 local async = require('neotest.async')
-local Path = require('plenary.path')
 local lib = require('neotest.lib')
 local utils = require('neotest-dart.utils')
 local parser = require('neotest-dart.parser')
@@ -62,8 +61,7 @@ function adapter.is_test_file(file_path)
   if not vim.endswith(file_path, '.dart') then
     return false
   end
-  local elems = vim.split(file_path, Path.path.sep)
-  local file_name = elems[#elems]
+  local file_name = vim.fs.basename(file_path)
   local is_test = vim.endswith(file_name, 'test.dart')
   return is_test
 end
